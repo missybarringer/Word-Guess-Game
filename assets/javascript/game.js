@@ -21,7 +21,9 @@ var wrongWord = [];
 var choosenWord = farmAnimals[randNum];
 var underScore = [];
 
-let docUnderScore = document.getElementById(underScore);
+let docUnderScore = document.getElementById('underscore');
+var docRightGuess = document.getElementById('rightGuess');
+
 //Create underscores based on the length of the word
 
 function generateUnderscore() {
