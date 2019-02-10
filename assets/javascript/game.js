@@ -11,61 +11,136 @@
 // Print letters typed (if same letter typed previously doesn't print here and doesn't decrease remaining)
 // Left column has the picture of the band that they one with - changes with next win
 
+//Set wins variable to 0
 var wins = 0;
 //Array of Animals
+// docWins();
+// function docWins() {
+//     document.getElementById("wins").innerHTML = wins;
+// }
 var farmAnimals = ["donkey","horse","alpaca","chicken","goat"];
-//Choose a random word
-var randNum = Math.floor(Math.random() * farmAnimals.length);
-var rightWord = [];
-var wrongWord = [];
-var choosenWord = farmAnimals[randNum];
-var underScore = [];
+//Choose a random word from the animal array
+var currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
+var progressWord = [];
+var resetLettersGuessed = ""
+var guessesLeft = 12;
 
-let docUnderScore = document.getElementById('underscore');
-var docRightGuess = document.getElementById('rightGuess');
+console.log(currentWord);
 
-//Create underscores based on the length of the word
+for (i = 0; i < currentWord.length; i++) {
+    progressWord.push("_");
+}
 
-function generateUnderscore() {
-    for(var i = 0; i < choosenWord.length; i++) {
-        underScore.push('_');
-        
+// var progressWord.replace(","," ", -1);
+window.onload = function() {
+    docProgressWord();
+    function docProgressWord() {
+        document.getElementById("word-guess").innerHTML =  progressWord.join(" ");
     }
-    return underScore;
-// document.getElementById("generateUnderscore").innerHTML=generateUnderscore;
+    docWins();
+    function docWins() {
+        document.getElementById("wins").innerHTML=wins
+    }
+}
+// letterInWord();
+
+function letterInWord(letter) {
+    var positions = new Array();
+    for (i = 0; i < currentWord.length; i++) {
+        if (currentWord[i] === letter)
+        positions.push(i);
+    }
+    return positions;
+}
+
+function lettersToGuess() {
+    var toGuess = 0;
+    for (i in progressWord) {
+        if (progressWord[i] === "_")
+        toGuess++;
+    }
+    return toGuess;
 }
 
 document.onkeyup = function(event) {
-    var userGuess = event.key;   //51:41
-// if Users guess is right
-    if(choosenWord.indexOf(userGuess) > -1) {
-        //if Users guess is right
-        rightWord.push(userGuess);
-        underScore[choosenWord.indexOf(userGuess)] = userGuess;
-        // docUnderScore[0].innerHTML = underScore.join(' ');
-        // docRightGuess[0].innerHTML = rightWord;
-        // if(underScore.join('') == choosenWord) {
-        //     alert('You Win');
-        // }
-        console.log(rightWord);
+    var letter = event.key;
+    var lettersGuessed = letter.toUpperCase();
+    
+    console.log("you have typed a letter: ".concat(letter));
+    
+    var positions = letterInWord(lettersGuessed);
+    
+    if (positions.length) {
+        
+        for (i = 0; i < positions.length; i++) {
+            progressWord[positions[i]] = lettersGuessed;
+        }
+        docProgressWord();
+        function docProgressWord() {
+            document.getElementById("word-guess").innerHTML =  progressWord.join(" ");
+        }
+    } else {
+        LettersGuessed();
+        function LettersGuessed() {
+            document.getElementById("letters-guessed").innerHTML += lettersGuessed + " ";
+        
+        // subtract a point from guesses left
+        guessesLeft--;
+        document.getElementById("guesses-left").innerHTML = guessesLeft;
     }
-    else {
-        wrongWord.push(userGuess);
-        console.log(wrongWord);
-    console.log(userGuess);
-    console.log(underScore);
     }
-    // document.getElementById(userGuess).innerHTML = userGuess;
-};
-
-// document.getElementById("generateUnderscore").innerHTML="Yes";
-window.onload = function() {
-    score();
-    function score() {
-        document.getElementById("wins").innerHTML =wins;
-    };
+    
+    if (guessesLeft === 0) {
+        location.reload();
+    }
+    
+    if (lettersToGuess() == 0) {       //used to have ==
+        //reset guesses left
+        guessesLeft = 12;
+        document.getElementById("guesses-left").innerHTML = guessesLeft;
+        // reset letters guessed
+        document.getElementById("letters-guessed").innerHTML = resetLettersGuessed;
+        // generate a new word to guess
+        currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
+        // pushes blanks for new word
+        progressWord = [];
+        for (i = 0; i < currentWord.length; i++) {
+            progressWord.push("_");
+        }
+        document.getElementById("word-guess").innerHTML = progressWord.join(" ");
+        
+        wins++;
+        docWins();
+        function docWins() {
+            document.getElementById("wins").innerHTML=wins;
+        }
+        console.log(currentWord);
+        console.log(progressWord);
+        // letterInWord();
+    }
+    console.log(wins);
+                                            // if (guessesLeft === 12)  {
+                                            //      location.reload();
+                                            // }
 }
+// location.reload();
+
+// function lettersToGuess() {
+    //     var i;
+    //     var toGuess = 0;
+    //     for (i in progressWord) {
+        //         if (progressWord[i] === "_")
+        //             toGuess++;
+        //     }
+        //     return toGuess;
+// }
+// docToGuess(); {
+//     function docToGuess() {
+//         document.getElementById("to-guess").innerHTML = toGuess;
+//     }
+// }
 
 
-console.log(choosenWord);
-console.log(generateUnderscore());
+
+
+
