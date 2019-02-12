@@ -9,12 +9,18 @@
 // Number of guesses remaining (start at 12 or 13 and decrement with each wrong guess)
 // Letters Already Guessed
 // Print letters typed (if same letter typed previously doesn't print here and doesn't decrease remaining)
-// Left column has the picture of the band that they one with - changes with next win
+// Left column has the picture of the band that they won with - changes with next win
+/* did not get the last step done - looks like the farm animals array would have to be converted to object with a name: & image: parameters */
+/** var farmAnimals = [{name: "donkey", image: "assets/images/donkey.jpg"}, {name: "horse", image: "assets/images/horse.jpg"}, etc...  **/
+/*** then create a new farmAnimalsIndex variable to set the index? ***/
+/*** then display the image in the last section of code that resets everything and displays the last word won ****/
+/**** Link to my Responsive Portfolio with portfolio link to this game added https://missybarringer.github.io/Responsive-Portfolio/ ****/
+
 
 //Set wins variable to 0
     var wins = 0;
 //Array of Animals
-    var farmAnimals = ["donkey","horse","alpaca","chicken","goat"];
+    var farmAnimals = ["donkey","horse","alpaca","chicken","goat","rabbit","cow","dog","donkey","duck","goose","ostrich","peacock","pig","rooster","sheep","turkey"];
     //Choose a random word from the animal array
     var currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
     var progressWord = [];
@@ -23,8 +29,7 @@
     var guesses = [];
     var wrongLetter=[];
     var oldCurrentWord=[];
-
-    
+  
     console.log(currentWord);
     // for the length of the word push underscores
     for (i = 0; i < currentWord.length; i++) {
@@ -65,7 +70,7 @@
         var lettersGuessed = letter.toUpperCase();
         guesses.push(lettersGuessed);
         
-        console.log("you have typed a letter: ".concat(letter));
+        console.log("you typed : ".concat(letter));
         
         var positions = letterInWord(lettersGuessed);
         
@@ -82,56 +87,81 @@
             //else take the letters guessed
             LettersGuessed();
             function LettersGuessed() {
-            // print the letters guessed
-            console.log(guesses);
+                // print the letters guessed if not in currentWord and not equal to a previous letter typed
+                console.log(guesses);
                 if (currentWord.indexOf(letter) < 0 ) {
                     if (wrongLetter.indexOf(letter) < 0) {
                         wrongLetter.push(letter);
-                // subtract a point from guesses left
+                // subtract a point from guesses left if wrongLetter
                 guessesLeft--;
                     }
-                //print the guesses left number
+                //print the guesses left number and wrongLetters
                 document.getElementById("wrong-letters").innerHTML = wrongLetter;
                 document.getElementById("guesses-left").innerHTML = guessesLeft;
-                }
+                
+            }
             // }
-    }
         }
-        // if no guesses left then load the next word   
-        if (guessesLeft === 0) {
-            location.reload();
+    }
+    // if no guesses left then load the next word   
+    if (guessesLeft === 0) {
+            //reset guesses left
+            guessesLeft = 12;
+                // print the guessesLeft #
+                document.getElementById("guesses-left").innerHTML = guessesLeft;
+                // reset letters guessed to clear out old guesses
+                document.getElementById("wrong-letters").innerHTML = resetLettersGuessed;
+                // convert oldCurrent word to upperCase and print at top of game
+                oldCurrentWord = currentWord.toUpperCase();
+                document.getElementById("old-word").innerHTML = oldCurrentWord;
+
+            // generate a new word to guess
+            currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
+                // pushes blanks for new word
+                progressWord = [];
+                    for (i = 0; i < currentWord.length; i++) {
+                        progressWord.push("_");
+                    }
+                // prints new word
+                document.getElementById("word-guess").innerHTML = progressWord.join(" ");
+            // reset variables
+            wrongLetter = [];
+            lettersGuessed = [];
+            guesses = [];
         }
         
         // if user guessed the word clear out variables and reset guesseLeft and dashes for new word
         if (lettersToGuess() === 0) {       //used to have ==
             //reset guesses left
             guessesLeft = 12;
-            document.getElementById("guesses-left").innerHTML = guessesLeft;
-            // reset letters guessed
-            document.getElementById("wrong-letters").innerHTML = resetLettersGuessed;
-            oldCurrentWord = currentWord.toUpperCase();
-            document.getElementById("old-word").innerHTML = oldCurrentWord;
+                // print the guessesLeft #
+                document.getElementById("guesses-left").innerHTML = guessesLeft;
+                // reset letters guessed to clear out old guesses
+                document.getElementById("wrong-letters").innerHTML = resetLettersGuessed;
+                // convert oldCurrent word to upperCase and print at top of game
+                oldCurrentWord = currentWord.toUpperCase();
+                document.getElementById("old-word").innerHTML = oldCurrentWord;
 
             // generate a new word to guess
             currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
-            // pushes blanks for new word
-            progressWord = [];
-            for (i = 0; i < currentWord.length; i++) {
-                progressWord.push("_");
-            }
-            document.getElementById("word-guess").innerHTML = progressWord.join(" ");
+                // pushes blanks for new word
+                progressWord = [];
+                    for (i = 0; i < currentWord.length; i++) {
+                        progressWord.push("_");
+                    }
+                // prints new word
+                document.getElementById("word-guess").innerHTML = progressWord.join(" ");
+            // reset variables
             wrongLetter = [];
             lettersGuessed = [];
             guesses = [];
+
             // increment the wins by one and print       
             wins++;
-            docWins();
-            function docWins() {
-                document.getElementById("wins").innerHTML=wins;
-            }
-            console.log(currentWord);
-            console.log(progressWord);
-            // letterInWord();
+                docWins();
+                function docWins() {
+                    document.getElementById("wins").innerHTML=wins;
+                }
         }
         console.log(lettersGuessed);
         console.log(currentWord);

@@ -1,5 +1,5 @@
 # Word-Guess-Game
-____________________________________
+
 ## Contributors
 @missybarringer
 ____________________________________
@@ -42,7 +42,7 @@ ____________________________________
 #### Definitely talk with a TA or your instructor if you get tripped up during this challenge.
 
 #### Photo Contribuitions came from the following people on unsplash
-* Photo by 
+* Photo by Patrick Baum on Unsplash
 ____________________________________
 ## License
 *This product is licensed under the MIT License (MIT).
@@ -57,4 +57,5 @@ ____________________________________
 * Twitter: @goatfeatherfarm
 * Facebook: @goatfeatherfarm
 * Instagram: @goatfeatherfarm
+* Added to Personal Portfolio webpage: https://missybarringer.github.io/Responsive-Portfolio/
 
