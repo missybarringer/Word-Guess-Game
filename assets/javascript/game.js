@@ -111,10 +111,6 @@
                 document.getElementById("guesses-left").innerHTML = guessesLeft;
                 // reset letters guessed to clear out old guesses
                 document.getElementById("wrong-letters").innerHTML = resetLettersGuessed;
-                // convert oldCurrent word to upperCase and print at top of game
-                oldCurrentWord = currentWord.toUpperCase();
-                document.getElementById("old-word").innerHTML = oldCurrentWord;
-
             // generate a new word to guess
             currentWord = farmAnimals[Math.floor(Math.random() * farmAnimals.length)].toUpperCase();
                 // pushes blanks for new word

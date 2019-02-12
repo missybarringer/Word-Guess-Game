@@ -11,14 +11,14 @@ body {
 }
 
 #old-word {
-    font-size: 22px;
+    font-size: 26px;
     padding-top: 10px;
     padding-bottom: 10px;
     color: #3366cc
 }
 
 #word-guess {
-    font-size: 12px;
+    font-size: 18px;
 }
 
 h2 {
