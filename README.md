@@ -7,7 +7,7 @@ ____________________________________
 * CSS3, HTML5, Javascript
 * GitHub Link: https://github.com/missybarringer/Word-Guess-Game.git
 ____________________________________
-## About
+## About - Vandy Bootcamp assignment with the following instructions...
 #### [Watch the demo](https://youtu.be/W-IJcC4tYFI).
 
 #### Choose a theme for your game! In the demo, we picked an 80s theme: 80s questions, 80s sound and an 80s aesthetic. You can choose any subject for your theme, though, so be creative!
