@@ -9,7 +9,7 @@ ____________________________________
 * Webpage: https://missybarringer.github.io/Word-Guess-Game/
 ____________________________________
 
-#### Guess the Farm animal Hangman Game
+## Guess the Farm animal Hangman Game
 
 #### Press any key to get started!
 #### Display the following:
